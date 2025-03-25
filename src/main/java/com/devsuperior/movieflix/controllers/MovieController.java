@@ -8,6 +8,7 @@ import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.devsuperior.movieflix.dto.MovieCardDTO;
@@ -27,13 +28,13 @@ public class MovieController {
 		return ResponseEntity.ok().body(service.findById(id));
 	}
 	@PreAuthorize("hasAnyRole('VISITOR', 'MEMBER')")
-	@GetMapping(value = "/{id}/reviews")
-	public ResponseEntity<MovieCardDTO> reviews(@PathVariable Long id) {
-		return ResponseEntity.ok().body(service.reviews(id));
+	@GetMapping(value = "/reviews")
+	public ResponseEntity<Page<MovieCardDTO>> reviews(Pageable pageable) {
+		return ResponseEntity.ok().body(service.reviews(pageable));
 	}
 	@PreAuthorize("hasAnyRole('VISITOR', 'MEMBER')")
-	@GetMapping()
-	public ResponseEntity<Page<MovieCardDTO>> reviews(Pageable pageable) {
-		return ResponseEntity.ok().body(service.searchMovieOrder(pageable));
+	@GetMapping
+	public ResponseEntity<Page<MovieCardDTO>> searchMovieOrder(@RequestParam(defaultValue = "1") Long genreId ,Pageable pageable) {
+		return ResponseEntity.ok().body(service.searchMovieOrder(genreId, pageable));
 	}
 }

@@ -46,7 +46,6 @@ public class User implements UserDetails {
     private List<Review> reviews = new ArrayList<>();
 
     public User() {
-
     }
 
     public User(Long id, String name, String email, String password) {

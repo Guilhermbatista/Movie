@@ -24,13 +24,12 @@ public class MovieService {
 	}
 
 	@Transactional(readOnly = true)
-	public MovieCardDTO reviews(Long id) {
-		return new MovieCardDTO(
-				repository.findById(id).orElseThrow(() -> new ResourceNotFoundException("Entity not found")));
-	}
+	public Page<MovieCardDTO> reviews(Pageable pageable) {
+		return repository.searchAllMoviesrder(pageable).map(x -> new MovieCardDTO(x));
+}
 
 	@Transactional(readOnly = true)
-	public Page<MovieCardDTO> searchMovieOrder(Pageable pageable) {
-		return repository.searchByMovieOrder(pageable).map(x -> new MovieCardDTO(x));
+	public Page<MovieCardDTO> searchMovieOrder(Long id, Pageable pageable) {
+		return repository.searchByMovieOrder(id, pageable).map(x -> new MovieCardDTO(x));
 	}
 }

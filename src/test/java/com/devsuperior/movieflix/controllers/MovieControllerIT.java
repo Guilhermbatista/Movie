@@ -130,7 +130,7 @@ public class MovieControllerIT {
 		String accessToken = tokenUtil.obtainAccessToken(mockMvc, visitorUsername, visitorPassword);
 
 		ResultActions result =
-				mockMvc.perform(get("/movies")
+				mockMvc.perform(get("/movies/reviews")
 					.header("Authorization", "Bearer " + accessToken)
 					.contentType(MediaType.APPLICATION_JSON));
 
@@ -154,7 +154,7 @@ public class MovieControllerIT {
 		String accessToken = tokenUtil.obtainAccessToken(mockMvc, memberUsername, memberPassword);
 		
 		ResultActions result =
-				mockMvc.perform(get("/movies")
+				mockMvc.perform(get("/movies/reviews")
 					.header("Authorization", "Bearer " + accessToken)
 					.contentType(MediaType.APPLICATION_JSON));
 

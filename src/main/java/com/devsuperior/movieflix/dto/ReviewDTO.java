@@ -1,22 +1,40 @@
 package com.devsuperior.movieflix.dto;
 
+import com.devsuperior.movieflix.entities.Review;
+
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 
 public class ReviewDTO {
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private Long id;
 
-    private Long id;
+	@NotBlank(message = "Campo requerido")
+	private String text;
 
-    @NotBlank(message = "Campo requerido")
-    private String text;
+	@NotNull(message = "Campo requerido")
+	private Long movieId;
 
-    @NotNull(message = "Campo requerido")
-    private Long movieId;    
-    
-    private Long userId;
-    private String userName;
-    private String userEmail;
-    
+	private Long userId;
+	private String userName;
+	private String userEmail;
+
+	public ReviewDTO() {
+	}
+
+	public ReviewDTO(Review entity) {
+		id = entity.getId();
+		text = entity.getText();
+		movieId = entity.getMovie().getId();
+		userId = entity.getUser().getId();
+		userName = entity.getUser().getName();
+		userEmail = entity.getUser().getEmail();
+	}
+
 	public Long getId() {
 		return id;
 	}

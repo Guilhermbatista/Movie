@@ -1,8 +1,8 @@
 package com.devsuperior.movieflix.projections;
 
-public interface MovieProjection {
+public interface MovieAllProjection {
 	
-	Long getId();
+	Long getGenre_Id();
 	String getTitle();
 	String getSub_Title();
 	Integer getMovie_Year();
